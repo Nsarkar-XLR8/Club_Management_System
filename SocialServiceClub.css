@@ -1,0 +1,199 @@
+/* Reset */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5 url(./images/BG1.jpg);
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+header {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 10px 20px;
+}
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative;
+}
+.logo img { height: 55px; }
+.profile img { height: 45px; width: 45px; border-radius: 50%; }
+.nav-links { list-style: none; display: flex; gap: 25px; }
+.nav-links a {
+  color: #000; text-decoration: none; font-weight: bold; padding: 8px 12px;
+}
+.nav-links a.active, .nav-links a:hover { background: #ddd; border-radius: 4px; }
+.hamburger { display: none; font-size: 26px; cursor: pointer; }
+
+/* Dropdown */
+.dropdown { position: relative; }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  background: #fff;
+  list-style: none;
+  padding: 8px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 6px;
+  min-width: 200px;
+}
+.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu li a { display: block; padding: 10px 14px; color: #000; }
+.dropdown-menu li a:hover { background: #f3f3f3; }
+
+/* Main Section Layout */
+.main-section {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left wide, right narrow */
+  gap: 40px;
+}
+.main-section h2 {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+
+/* Search bar */
+.search-bar { display: flex; gap: 8px; margin-bottom: 20px; }
+.search-bar input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  width: 260px;
+}
+.search-bar button {
+  padding: 8px 14px;
+  border: none;
+  background: #0077ff;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+}
+.search-bar button:hover { background: #005fcc; }
+
+/* Member Cards */
+.member-card {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.member-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.member-card img {
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Event Cards */
+.event-card {
+  background: #fff;
+  padding: 15px;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.event-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+.event-card img {
+  width: 110px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+.event-card p { font-size: 14px; color: #444; }
+
+/* Upcoming Events refinement */
+.event-card.upcoming { align-items: flex-start; }
+.event-card.upcoming .event-info h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #0077ff;
+}
+.event-card.upcoming .event-meta {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* Empty state */
+.empty-card {
+  background: #fff;
+  padding: 20px;
+  border: 1px dashed #ccc;
+  border-radius: 6px;
+  text-align: center;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background: #333;
+  color: #fff;
+  margin-top: auto;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .main-section { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #fff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    z-index: 10;
+  }
+  .nav-links.show { display: flex; }
+  .hamburger { display: block; }
+}
+@media (max-width: 480px) {
+  .logo img { height: 40px; }
+  .profile img { height: 35px; width: 35px; }
+  .member-card img, .event-card img { width: 60px; height: 60px; }
+  .nav-links a { padding: 10px; font-size: 14px; }
+}

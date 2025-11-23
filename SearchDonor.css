@@ -1,0 +1,254 @@
+/* ---------------- Reset ---------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f5f5f5 url(./images/BG1.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ---------------- Navbar ---------------- */
+header {
+  background: #fff;
+  padding: 10px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1000;
+}
+/* Navbar container */
+/* Navbar */
+header {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Navbar container */
+header {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.logo img {
+  height: 55px;
+}
+
+.profile img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+}
+
+.hamburger {
+  font-size: 28px;
+  cursor: pointer;
+  display: none; /* hidden on desktop */
+}
+
+/* Default desktop menu */
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+}
+
+.nav-links a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+/* Responsive behavior */
+@media (max-width: 992px) {
+  /* Show hamburger, hide normal links */
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;  /* align left */
+    background: #fff;
+    position: absolute;
+    top: 100%;      /* just below navbar */
+    left: 0;
+    width: 100%;    /* full width dropdown */
+    padding: 15px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%; /* full clickable width */
+  }
+
+  .nav-links a {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+  }
+}
+
+
+
+/* Responsive menu behavior */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  nav .nav-links {
+    display: none; /* hidden by default */
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    padding: 15px 0;
+  }
+
+  nav .nav-links.show {
+    display: flex;
+  }
+}
+
+
+
+/* ---------------- Search Section ---------------- */
+.search-section {
+  display: flex;
+  justify-content: center;
+  margin: 30px 20px;
+}
+
+.search-box {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-box input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 150px;
+}
+
+.search-box button {
+  padding: 10px 15px;
+  border: none;
+  background: #007bff;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #0056b3;
+}
+
+/* ---------------- Donor Table ---------------- */
+.donor-table {
+  max-width: 900px;
+  margin: 0 auto 50px auto;
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+.donor-table h2 {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 2px solid #ddd;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+th {
+  background: #007bff;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+/* ---------------- Footer ---------------- */
+footer {
+  background: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: auto;
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 768px) {
+  .hamburger { display: block; }
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .nav-links.show { max-height: 500px; }
+
+  .logo img { height: 50px; }
+  .profile img { height: 40px; width: 40px; }
+
+  .search-box input { min-width: 100%; }
+}
+
+@media (max-width: 480px) {
+  .logo img { height: 40px; }
+  .profile img { height: 35px; width: 35px; }
+  .nav-links a { padding: 10px; font-size: 14px; }
+  th, td { padding: 8px 10px; font-size: 14px; }
+}
