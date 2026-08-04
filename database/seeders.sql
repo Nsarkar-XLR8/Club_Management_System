@@ -1,5 +1,4 @@
 -- UIU Club Management System (CMS) Database Seeders
-USE `cms`;
 
 -- 1. Roles
 INSERT INTO `roles` (`id`, `name`, `description`) VALUES

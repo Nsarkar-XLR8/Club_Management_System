@@ -1,9 +1,6 @@
 -- UIU Club Management System (CMS) Database Schema
 -- Compatible with MySQL 5.7+ / 8.0+
 
-CREATE DATABASE IF NOT EXISTS `cms` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `cms`;
-
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- Drop existing tables if present
