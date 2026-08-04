@@ -28,6 +28,8 @@ export default function FacilityBookingPage({ onOpenAuth }) {
 
   // Booking Form
   const [facilityId, setFacilityId] = useState('');
+  const [clubId, setClubId] = useState('');
+  const [clubs, setClubs] = useState([]);
   const [bookingDate, setBookingDate] = useState('');
   const [startTime, setStartTime] = useState('09:00');
   const [endTime, setEndTime] = useState('12:00');
@@ -35,6 +37,7 @@ export default function FacilityBookingPage({ onOpenAuth }) {
 
   useEffect(() => {
     fetchFacilities();
+    fetchClubs();
   }, []);
 
   const fetchFacilities = () => {
@@ -45,12 +48,23 @@ export default function FacilityBookingPage({ onOpenAuth }) {
           setFacilities(data.facilities || []);
           setBookings(data.bookings || []);
           if (data.facilities && data.facilities.length > 0) {
-            setFacilityId(data.facilities[0].id);
+            setFacilityId(data.facilities[0].id.toString());
           }
         }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
+  };
+
+  const fetchClubs = () => {
+    api.getClubs().then(data => {
+      if (data.status === 'success') {
+        setClubs(data.clubs || []);
+        if (data.clubs && data.clubs.length > 0) {
+          setClubId(data.clubs[0].id.toString());
+        }
+      }
+    }).catch(() => {});
   };
 
   const handleBookFacility = async (e) => {
@@ -62,7 +76,7 @@ export default function FacilityBookingPage({ onOpenAuth }) {
     setMsg({ type: '', text: '' });
     const res = await api.bookFacility({
       facility_id: parseInt(facilityId),
-      club_id: 1,
+      club_id: parseInt(clubId),
       booking_date: bookingDate,
       start_time: startTime,
       end_time: endTime,
@@ -118,19 +132,36 @@ export default function FacilityBookingPage({ onOpenAuth }) {
           </h3>
 
           <form onSubmit={handleBookFacility} className="space-y-4">
-            <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Select Facility / Gear</label>
-              <select
-                value={facilityId}
-                onChange={(e) => setFacilityId(e.target.value)}
-                className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-[#F26522] focus:ring-1 focus:ring-[#F26522]"
-              >
-                {facilities.map(f => (
-                  <option key={f.id} value={f.id}>
-                    {f.name} ({f.type.toUpperCase()} • Cap: {f.capacity})
-                  </option>
-                ))}
-              </select>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Select Facility / Gear</label>
+                <select
+                  value={facilityId}
+                  onChange={(e) => setFacilityId(e.target.value)}
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-[#F26522] focus:ring-1 focus:ring-[#F26522]"
+                >
+                  {facilities.map(f => (
+                    <option key={f.id} value={f.id}>
+                      {f.name} ({f.type.toUpperCase()} • Cap: {f.capacity})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 mb-1">Booking for Club</label>
+                <select
+                  value={clubId}
+                  onChange={(e) => setClubId(e.target.value)}
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:border-[#F26522] focus:ring-1 focus:ring-[#F26522]"
+                >
+                  {clubs.map(c => (
+                    <option key={c.id} value={c.id}>
+                      {c.name} ({c.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <div>
