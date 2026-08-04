@@ -29,6 +29,25 @@ This unified platform handles everything from secure club voting to automated QR
 
 This project utilizes a highly decoupled yet easily deployable architecture:
 
+```mermaid
+graph TD
+    Client["📱 User Browser"] -->|"HTTP/HTTPS"| Render["☁️ Render Docker Container"]
+    
+    subgraph "Apache Server (mod_rewrite)"
+        Render -->|"/"| React["⚛️ React SPA <br/> Vite, Tailwind"]
+        Render -->|"/api/*"| PHP["🐘 PHP 8.2 API <br/> JWT, REST"]
+    end
+    
+    React -.->|"Fetch API"| PHP
+    
+    PHP -->|"SSL TCP"| Aiven[("🐬 Aiven MySQL <br/> Managed DB")]
+    
+    style React fill:#38B2AC,stroke:#fff,stroke-width:2px,color:#fff
+    style PHP fill:#777BB4,stroke:#fff,stroke-width:2px,color:#fff
+    style Aiven fill:#005C84,stroke:#fff,stroke-width:2px,color:#fff
+    style Render fill:#2CA5E0,stroke:#fff,stroke-width:2px,color:#fff
+```
+
 - **Frontend:** React.js, Vite, Tailwind CSS, React Router DOM, Lucide Icons.
 - **Backend:** PHP 8.2 (Raw PHP with a custom RESTful Routing Engine).
 - **Database:** MySQL / MariaDB (Prepared statements prevent SQL injection).
