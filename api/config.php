@@ -10,15 +10,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+define('DB_PORT', getenv('DB_PORT') ?: 3306);
 define('DB_USER', getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('DB_PASS') ?: '');
 define('DB_NAME', getenv('DB_NAME') ?: 'cms');
+define('DB_SSL', getenv('DB_SSL') === 'true');
 define('JWT_SECRET', getenv('JWT_SECRET') ?: 'uiu_cms_jwt_secret_key_2026_x89a');
 
 function getDB() {
     static $conn = null;
     if ($conn === null) {
-        $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $conn = mysqli_init();
+        
+        $flags = 0;
+        if (DB_SSL) {
+            $conn->ssl_set(NULL, NULL, NULL, NULL, NULL);
+            $flags = MYSQLI_CLIENT_SSL;
+        }
+        
+        @$conn->real_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, NULL, $flags);
+        
         if ($conn->connect_error) {
             http_response_code(500);
             echo json_encode(["status" => "error", "message" => "Database connection failed: " . $conn->connect_error]);

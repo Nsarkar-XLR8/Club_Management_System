@@ -578,16 +578,54 @@ switch ($resource) {
             "status" => "online",
             "name" => "United International University (UIU) CMS API",
             "version" => "3.0.0",
+            "architecture" => "Stateless REST (JWT + RBAC)",
             "endpoints" => [
-                "/api/auth/login",
-                "/api/clubs",
-                "/api/elections",
-                "/api/facilities",
-                "/api/announcements",
-                "/api/alumni",
-                "/api/events",
-                "/api/donors/search",
-                "/api/budgets"
+                "Authentication" => [
+                    "POST /api/auth/login",
+                    "POST /api/auth/register",
+                    "GET /api/auth/me"
+                ],
+                "Clubs" => [
+                    "GET /api/clubs",
+                    "GET /api/clubs/{id}",
+                    "POST /api/clubs/{id}/members"
+                ],
+                "Elections" => [
+                    "GET /api/elections",
+                    "POST /api/elections/vote"
+                ],
+                "Facilities" => [
+                    "GET /api/facilities",
+                    "POST /api/facilities/book",
+                    "PUT /api/facilities/approve"
+                ],
+                "Announcements" => [
+                    "GET /api/announcements",
+                    "POST /api/announcements/create"
+                ],
+                "Alumni" => [
+                    "GET /api/alumni",
+                    "POST /api/alumni/mentorship-request"
+                ],
+                "Events" => [
+                    "GET /api/events",
+                    "POST /api/events",
+                    "POST /api/events/{id}/register",
+                    "POST /api/events/checkin"
+                ],
+                "Forum" => [
+                    "GET /api/forum/topics",
+                    "POST /api/forum/topics"
+                ],
+                "Donors" => [
+                    "GET /api/donors/search",
+                    "POST /api/donors/register"
+                ],
+                "Budgets" => [
+                    "GET /api/budgets",
+                    "POST /api/budgets/request",
+                    "PUT /api/budgets/review"
+                ]
             ]
         ]);
         break;

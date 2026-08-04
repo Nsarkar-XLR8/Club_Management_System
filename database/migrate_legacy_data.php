@@ -6,11 +6,21 @@
 
 // Load DB connection parameters
 $host = getenv('DB_HOST') ?: 'localhost';
+$port = getenv('DB_PORT') ?: 3306;
 $user = getenv('DB_USER') ?: 'root';
 $pass = getenv('DB_PASS') ?: '';
 $dbname = getenv('DB_NAME') ?: 'cms';
+$ssl = getenv('DB_SSL') === 'true';
 
-$conn = new mysqli($host, $user, $pass);
+$conn = mysqli_init();
+$flags = 0;
+if ($ssl) {
+    $conn->ssl_set(NULL, NULL, NULL, NULL, NULL);
+    $flags = MYSQLI_CLIENT_SSL;
+}
+
+@$conn->real_connect($host, $user, $pass, '', $port, NULL, $flags);
+
 if ($conn->connect_error) {
     die("Database Connection Failed: " . $conn->connect_error . "\n");
 }
