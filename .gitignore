@@ -1,0 +1,37 @@
+# Node
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# PHP
+vendor/
+*.log
+
+# Editor directories and files
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Uploaded images (usually have uniqid_name or timestamp_name)
+images/*_*
+pages/images/*_*
+
+# Exclude specific app images that might have underscores but are needed
+!images/game_dev.png
+!images/bg_Blood.jpg
+!images/CMS_Logo.png
+
+# Miscellaneous
+gstack_skill_cheatsheet.md
