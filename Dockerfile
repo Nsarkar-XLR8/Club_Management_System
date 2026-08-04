@@ -1,7 +1,7 @@
 # ==========================================
 # Stage 1: Build the React Frontend
 # ==========================================
-FROM node:18 AS frontend-build
+FROM node:20 AS frontend-build
 WORKDIR /app/frontend
 
 # Copy package.json and install dependencies
